@@ -1,0 +1,1 @@
+(function(){$(function(){var t=ace.edit("editor");$(".snippet-form-holder form").on("submit",function(){$(".snippet-file-content").val(t.getValue())})})}).call(this);
