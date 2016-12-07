@@ -1,4 +1,5 @@
 class Projects::SnippetsController < Projects::ApplicationController
+  protect_from_forgery except: :show
   include ToggleAwardEmoji
 
   before_action :module_enabled
@@ -58,6 +59,7 @@ class Projects::SnippetsController < Projects::ApplicationController
     @note = @project.notes.new(noteable: @snippet)
     @notes = Banzai::NoteRenderer.render(@snippet.notes.fresh, @project, current_user)
     @noteable = @snippet
+    @project_snippet_corp_path = request.original_url
   end
 
   def destroy

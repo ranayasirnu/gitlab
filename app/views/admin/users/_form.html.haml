@@ -20,6 +20,7 @@
           = f.text_field :email, required: true, autocomplete: 'off', class: 'form-control'
           %span.help-inline * required
 
+        = f.hidden_field :domain_name, value: request.domain
     - if @user.new_record?
       %fieldset
         %legend Password

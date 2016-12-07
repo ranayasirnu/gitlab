@@ -1,4 +1,5 @@
 class SnippetsController < ApplicationController
+  protect_from_forgery except: :show
   include ToggleAwardEmoji
 
   before_action :snippet, only: [:show, :edit, :destroy, :update, :raw, :download]
@@ -56,6 +57,7 @@ class SnippetsController < ApplicationController
   end
 
   def show
+    @snippet_corp_path = request.original_url
   end
 
   def destroy

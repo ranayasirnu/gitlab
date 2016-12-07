@@ -1,0 +1,36 @@
+- @no_container = true
+- page_title "Users"
+
+%div{ class: container_class }
+  .top-area
+    .prepend-top-default
+      %h3 Source Code Projects
+  %ul.users-list.content-list
+    - if Project.count == 0
+      %li
+        .nothing-here-block No projects found.
+
+    - elsif @domain == "asposeptyltd.com"
+      .api-box.col-lg-4
+        .api-product-title
+          %a{:href => "http://github.com/aspose-words"}
+            %i.api-words-ico.api-ico  
+          %div
+            %a{:href => "http://git-qa.aspose.com"}
+              %h2 Aspose
+              %span{style: 'width:225px;' } File Format APIs
+
+      .api-box.col-lg-4
+        .api-product-title
+          %a{:href => "https://github.com/groupdocs-viewer"}
+            %i.api-words-ico.api-ico  
+          %div
+            %a{:href => "http://git-qa.groupdocs.com"}
+              %h2 GroupDocs
+              %span{style: 'width:225px;' } Document Manipulation APIs
+        
+
+    - elsif @domain == "aspose.com"
+      = render partial: 'help/aspose'
+    - elsif @domain == "groupdocs.com"
+      = render partial: 'help/groupdocs'

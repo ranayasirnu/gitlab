@@ -87,7 +87,7 @@ Rails.application.routes.draw do
   # Get all keys of user
   get ':username.keys' => 'profiles/keys#get_keys', constraints: { username: /.*/ }
 
-  root to: "root#index"
+  root to: "help#home"
 
   get '*unmatched_route', to: 'application#not_found'
 end

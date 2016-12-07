@@ -171,7 +171,7 @@ class User < ActiveRecord::Base
   scope :active, -> { with_state(:active) }
   scope :not_in_project, ->(project) { project.users.present? ? where("id not in (:ids)", ids: project.users.map(&:id) ) : all }
   scope :without_projects, -> { where('id NOT IN (SELECT DISTINCT(user_id) FROM members)') }
-
+  
   def self.with_two_factor
     joins("LEFT OUTER JOIN u2f_registrations AS u2f ON u2f.user_id = users.id").
       where("u2f.id IS NOT NULL OR otp_required_for_login = ?", true).distinct(arel_table[:id])

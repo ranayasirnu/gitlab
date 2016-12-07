@@ -1,5 +1,10 @@
 .hidden-xs
   - if current_user
+
+    = text_field_tag :copy_snippet, "<script src=\"#{@snippet_corp_path}.js\"></script>" , class: "js-select-on-focus", readonly: true
+    .btn
+      = clipboard_button(clipboard_target: '#copy_snippet')
+
     = link_to new_snippet_path, class: "btn btn-grouped btn-create new-snippet-link", title: "New snippet" do
       New snippet
   - if can?(current_user, :admin_personal_snippet, @snippet)

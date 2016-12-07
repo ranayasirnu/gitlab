@@ -21,7 +21,8 @@ class ApplicationController < ActionController::Base
   before_action :add_gon_variables
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :require_email, unless: :devise_controller?
-
+  before_action :reject_domain!
+  
   protect_from_forgery with: :exception
 
   helper_method :can?, :current_application_settings
@@ -226,6 +227,14 @@ class ApplicationController < ActionController::Base
   def require_email
     if current_user && current_user.temp_oauth_email?
       redirect_to profile_path, notice: 'Please complete your profile with email address' and return
+    end
+  end
+
+  def reject_domain!
+    if current_user && !current_user.admin? && current_user.domain_name != request.domain
+      sign_out current_user
+      flash[:alert] = "Your are not authorized to access domain #{request.domain} "
+      redirect_to new_user_session_path
     end
   end
 

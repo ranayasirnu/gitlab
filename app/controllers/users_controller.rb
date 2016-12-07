@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   skip_before_action :authenticate_user!
   before_action :user, except: [:exists]
   before_action :authorize_read_user!, only: [:show]
+  before_action :authorize_domain!, only: [:show]
 
   def show
     respond_to do |format|
@@ -93,6 +94,10 @@ class UsersController < ApplicationController
 
   def authorize_read_user!
     render_404 unless can?(current_user, :read_user, user)
+  end
+
+  def authorize_domain!
+    redirect_to new_user_session_path if(request.domain != @user.domain_name)
   end
 
   def user

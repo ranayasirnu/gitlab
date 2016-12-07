@@ -111,6 +111,11 @@
           %strong
             = @user.sign_in_count
 
+        %li
+          %span.light Domain-name:
+          %strong
+            = @user.domain_name
+
         - if @user.ldap_user?
           %li
             %span.light LDAP uid:

@@ -1,6 +1,6 @@
 - repository = nil unless local_assigns.key?(:repository)
 
-.file-content.code.js-syntax-highlight
+.file-content.code.js-syntax-highlight.white{:style => "border-color: transparent;"}
   .line-numbers
     - if blob.data.present?
       - link_icon = icon('link')

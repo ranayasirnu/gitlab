@@ -1,0 +1,8 @@
+%article.file-holder.snippet-file-content
+  .file-title
+    = blob_icon 0, snippet.file_name
+    = snippet.file_name
+    .file-actions
+      = link_to 'Raw', raw_snippet_url(snippet), class: "btn btn-sm", target: "_blank"
+      = link_to 'Download', download_snippet_url(snippet), class: "btn btn-sm"
+  = render 'shared/snippets/blob'

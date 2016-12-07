@@ -11,6 +11,7 @@
             = f.label :name, class: 'label-light' do
               Project name
             = f.text_field :name, class: "form-control", id: "project_name_edit"
+            = f.hidden_field :domain_name, value: request.domain
           .form-group
             = f.label :description, class: 'label-light' do
               Project description

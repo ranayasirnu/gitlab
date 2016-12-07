@@ -3,6 +3,10 @@ class HelpController < ApplicationController
 
   layout 'help'
 
+  def home
+    @domain = request.domain
+  end
+  
   def index
     @help_index = File.read(Rails.root.join('doc', 'README.md'))
 

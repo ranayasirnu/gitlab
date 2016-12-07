@@ -11,6 +11,7 @@ class ProjectsController < Projects::ApplicationController
   # Authorize
   before_action :authorize_admin_project!, only: [:edit, :update, :housekeeping, :download_export, :export, :remove_export, :generate_new_export]
   before_action :event_filter, only: [:show, :activity]
+  before_action :authorize_project_domain!, only: [:show]
 
   layout :determine_layout
 
@@ -333,7 +334,7 @@ class ProjectsController < Projects::ApplicationController
       :visibility_level, :import_url, :last_activity_at, :namespace_id, :avatar,
       :build_allow_git_fetch, :build_timeout_in_minutes, :build_coverage_regex,
       :public_builds, :only_allow_merge_if_build_succeeds, :request_access_enabled,
-      :lfs_enabled, project_feature_attributes
+      :lfs_enabled, :domain_name, project_feature_attributes
     )
   end
 
@@ -361,4 +362,11 @@ class ProjectsController < Projects::ApplicationController
   def get_id
     project.repository.root_ref
   end
+
+
+  def authorize_project_domain!
+    @user = User.find_by_username!(params[:namespace_id])
+    redirect_to new_user_session_path if(@user.blank? || request.domain != @user.domain_name)
+  end
+
 end

@@ -1,3 +1,4 @@
+- @snippet ||= snippet
 - unless @snippet.content.empty?
   - if markup?(@snippet.file_name)
     %textarea.markdown-snippet-copy.blob-content{data: {blob_id: @snippet.id}}
