@@ -97,7 +97,7 @@ class UsersController < ApplicationController
   end
 
   def authorize_domain!
-    redirect_to new_user_session_path if(request.domain != @user.domain_name)
+    redirect_to new_user_session_path if !@user.admin? && (@user.blank? || request.domain != @user.domain_name)
   end
 
   def user
