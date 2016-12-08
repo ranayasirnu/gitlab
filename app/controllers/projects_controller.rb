@@ -366,7 +366,7 @@ class ProjectsController < Projects::ApplicationController
 
   def authorize_project_domain!
     @user = User.find_by_username!(params[:namespace_id])
-    redirect_to new_user_session_path if(@user.blank? || request.domain != @user.domain_name)
+    redirect_to new_user_session_path if !@user.admin? && (@user.blank? || request.domain != @user.domain_name) 
   end
 
 end
